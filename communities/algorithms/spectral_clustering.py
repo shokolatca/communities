@@ -37,20 +37,16 @@ def eigenvector_matrix(L, n):
 
 def init_communities(num_nodes, k, cluster_size):
     # Инициализация кластеров с фиксированным количеством элементов
-    all_indices = list(range(num_nodes))
-    random.shuffle(all_indices)  # Перемешиваем индексы
-    communities = [set() for _ in range(k)]  # Создаем пустые кластеры
-    return communities
+    # all_indices = list(range(num_nodes))
+    # random.shuffle(all_indices)  # Перемешиваем индексы
+    # communities = [{} for _ in range(k)]  # Создаем пустые кластеры
+    return [{i} for i in random.sample(range(num_nodes), k)]
 
 
 def calc_centroids(V, communities):
     centroids = []
     for community in communities:
-        if len(community) > 0:  # Проверяем, что кластер не пуст
-            centroid = V[list(community)].mean(axis=0)
-        else:
-            # Если кластер пуст, создаем фиктивный нулевой центроид
-            centroid = np.zeros(V.shape[1])
+        centroid = V[list(community)].mean(axis=0)
         centroids.append(centroid)
 
     C = np.vstack(centroids)
