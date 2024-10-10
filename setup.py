@@ -17,7 +17,7 @@ setup(
     description="Library for detecting and visualizing community structure in graphs",
     long_description=readme,
     long_description_content_type="text/markdown",
-    version="v3.0.0",
+    version="v3.0.1",
     packages=["communities", "communities.algorithms", "communities.visualization"],
     python_requires=">=3",
     url="https://github.com/shobrook/communities",
