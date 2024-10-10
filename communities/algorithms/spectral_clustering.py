@@ -72,7 +72,7 @@ def update_assignments(V, C, communities, cluster_size):
                 continue
 
             cosine_sim = np.dot(V[i], C[c_i])
-            cosine_sim /= (np.linalg.norm(V[i]) * np.linalg.norm(C[c_i]))
+            cosine_sim /= np.linalg.norm(V[i]) * np.linalg.norm(C[c_i])
 
             if cosine_sim > best_sim:
                 best_sim = cosine_sim
