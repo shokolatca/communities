@@ -57,8 +57,15 @@ def update_assignments(V, C, communities, cluster_size):
     num_nodes = len(V)
     # Используем список для отслеживания количества узлов в каждом кластере
     cluster_sizes = [len(comm) for comm in communities]
+    
+    # Множество для отслеживания уже назначенных узлов
+    assigned_nodes = set().union(*communities)
 
     for i in range(num_nodes):
+        # Пропускаем узел, если он уже был назначен
+        if i in assigned_nodes:
+            continue
+
         best_sim, best_comm_index = -1, None
 
         # Для каждого узла находим ближайший центроид, учитывая, что кластер не переполнен
@@ -78,8 +85,10 @@ def update_assignments(V, C, communities, cluster_size):
         if best_comm_index is not None:
             communities[best_comm_index].add(i)
             cluster_sizes[best_comm_index] += 1
+            assigned_nodes.add(i)  # Добавляем узел в множество назначенных
 
     return communities
+
 
 
 ###### 
